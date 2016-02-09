@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="user-management"></div>
+<script type="text/template" id="user-list-template">
+    <h3>Following are the user's:</h3>
+    <form class="list-group-form">
+        <a href="/#create" class="btn btn-default ">Create User</a>
+        <table class="table striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Age</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <% _.each(users,function(user){%>
+                <tr>
+                    <td>
+                        <input type="checkbox" /></td>
+                    <td><%= user.get('Id')%></td>
+                    <td><%= user.get('FirstName')%></td>
+                    <td><%= user.get('LastName')%></td>
+                    <td><%= user.get('Age')%></td>
+                    <td>
+                        <a href="/#edit/<%= user.get('Id')%>" class="btn btn-primary">Edit</a></td>
+                </tr>
+            <%});%>
+        </table>
+    </form>
+</script>
+
+<script type="text/template" id="user-detail-template">
+    <h3>User Details</h3>
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td>:</td>
+            <td>
+                <input type="text" class="first-name" value="<%= user ? user.get('FirstName') : '' %>"/></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>:</td>
+            <td>
+                <input type="text" class="last-name" value="<%= user ? user.get('LastName') : '' %>"/></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>:</td>
+            <td>
+                <input type="text" class="age" value="<%= user ? user.get('Age') : '' %>"/></td>
+        </tr>
+    </table>
+    <input type="hidden" value="<%= user ? user.get('Id') : '' %>" class="hdnId"/> 
+    <input type="button" value="Save" id="saveUserDetails"/>
+</script>
